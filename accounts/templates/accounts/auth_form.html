@@ -1,0 +1,15 @@
+{% extends 'movies/base.html' %}
+
+{% block body %}
+    {% if request.resolver_match.url_name == 'signup' %}
+        <h2 class="text-center">SIGNUP</h2>
+    {% else %}
+        <h2 class="text-center">LOGIN</h2>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="SUBMIT">
+    </form>
+    
+{% endblock %}
