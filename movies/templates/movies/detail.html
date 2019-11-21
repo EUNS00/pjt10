@@ -7,13 +7,13 @@
     <p> 누적관객수 : {{ movie.audience }}</p>
     <p><img src="{{ movie.poster_url }}" alt="{{ movie.title }}" width= 400></p>
     <p><a href="{% url 'movies:like' movie.pk %}">
-        {% if user in movie.like_movie_users.all %}
-            <input type="submit" value='좋아요 취소'>
+        {% if user in movie.like_users.all %}
+            <input type="submit" value='❤️'>
         {% else %}
-            <input type="submit" value='좋아요'>
+            <input type="submit" value='🖤'>
         {% endif %}
     </a></p>
-    <p> {{ movie.like_movie_users.all | length }} 명이 이 영화를 좋아합니다.</p>
+    <p> {{ movie.like_users.all | length }} 명이 이 영화를 좋아합니다.</p>
     <p> 영화 소개 : {{ movie.description }}</p>
     <hr>
     <b><p>리뷰</p></b>
