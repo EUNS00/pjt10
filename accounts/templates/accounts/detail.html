@@ -13,10 +13,8 @@
         <a href="{% url 'movies:detail' movie.pk %}" style="color:black">[{{ movie.title }}]</a>    
     {% endfor %}
 
-    <p>팔로잉: {{ person.followings.all|length }} | 팔로워: {{ person.followers.all|length }}</p>
-    {{ person.followers }} <br>
-    {{ request.user }} <br>
-    {{ person }} <br>
+    <p>팔로잉: {{ person.following.all|length }} | 팔로워: {{ person.followers.all|length }}</p>
+    
     {% if request.user != person %}
         {% if request.user in person.followers.all %}
             <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Unffollow</a>

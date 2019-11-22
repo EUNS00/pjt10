@@ -19,7 +19,6 @@ def detail(request,user_pk):
     like_movies = user.like_movies.filter(pk=user_pk)
     person = get_object_or_404(get_user_model(), pk=user_pk)
     context = {'user':user, 'like_movies':like_movies, 'person': person}
-    embed()
     return render(request, 'accounts/detail.html', context)
 
 
@@ -58,7 +57,6 @@ def logout(request):
 def follow(request, user_pk):
     person = get_object_or_404(get_user_model(), pk=user_pk)
     user = request.user
-    embed()
     if person.followers.filter(pk=user.pk).exists():
         person.followers.remove(user)
     else:
