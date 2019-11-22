@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from movies.models  import Movie
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import get_user_model
+from .models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from movies.models  import Movie
 from .forms import CustumUserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
@@ -15,8 +17,8 @@ def index(request):
 def detail(request,user_pk):
     user = User.objects.get(pk=user_pk)
     like_movies = user.like_movies.filter(pk=user_pk)
-    
-    context = {'user':user, 'like_movies':like_movies, }
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    context = {'user':user, 'like_movies':like_movies, 'person': person}
     return render(request, 'accounts/detail.html', context)
 
 
@@ -50,3 +52,14 @@ def logout(request):
     auth_logout(request)
     return redirect('movies:index')
     
+
+@login_required
+def follow(request, user_pk):
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    user = request.user
+    embed()
+    if person.followers.filter(pk=user.pk).exists():
+        person.followers.remove(user)
+    else:
+        person.followers.add(user)
+    return redirect('accounts:detail', user_pk)

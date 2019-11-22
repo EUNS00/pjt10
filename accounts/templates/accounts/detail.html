@@ -4,12 +4,25 @@
     <hr>
     <p><b>작성한 리뷰</b></p>
     {% for review in user.review_set.all %}
+        <a href="{% url 'movies:detail' review.movie.pk %}" style="color:black">[{{ review.movie.title }}]</a>
         <p>리뷰: {{ review.content }}</p>
     {% endfor %}    
     <hr>
     <p><b>좋아요한 영화</b></p>
     {% for movie in like_movies %}
-        <p>{{ movie.title }}</p>
+        <a href="{% url 'movies:detail' movie.pk %}" style="color:black">[{{ movie.title }}]</a>    
     {% endfor %}
+
+    <p>팔로잉: {{ person.followings.all|length }} | 팔로워: {{ person.followers.all|length }}</p>
+    {{ person.followers }} <br>
+    {{ request.user }} <br>
+    {{ person }} <br>
+    {% if request.user != person %}
+        {% if request.user in person.followers.all %}
+            <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Unffollow</a>
+        {% else %}
+            <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Follow</a>
+        {% endif %}
+    {% endif %}
 
 {% endblock %}
