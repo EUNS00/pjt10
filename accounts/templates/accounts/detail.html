@@ -1,6 +1,6 @@
 {% extends 'movies/base.html' %}
 {% block body %}
-    {{ user.username }}
+    {{ user.username }}'s detail
     <hr>
     <p><b>작성한 리뷰</b></p>
     {% for review in user.review_set.all %}
@@ -16,7 +16,7 @@
     <p>팔로잉: {{ person.followings.all|length }} | 팔로워: {{ person.followers.all|length }}</p>
     {% if request.user != person.user %}
         {% if user in person.followers.all %}
-            <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Unffollow</a>
+             <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Unffollow</a>
         {% else %}
             <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Follow</a>
         {% endif %}
