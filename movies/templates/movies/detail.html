@@ -22,7 +22,7 @@
         <p> 평점 : {{ review.score }} </p>
         <form action="{% url 'movies:review_delete' movie.pk review.pk %}" value="리뷰삭제">
             {% csrf_token%}
-            <input type="submit" value='댓글 삭제'>
+            <input type="submit" class="btn btn-primary" value='댓글 삭제'>
         </form>
     {% endfor %}
 
@@ -30,7 +30,7 @@
     <form action="{% url 'movies:review_create' movie.pk %}" method="POST">
         {% csrf_token %}
         {{ review_form.as_p }}
-        <input type="submit" value="리뷰 작성">
+        <input type="submit" class="btn btn-primary" value="리뷰 작성">
     </form>
     
 {% endblock %}

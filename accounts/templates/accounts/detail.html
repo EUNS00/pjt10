@@ -1,6 +1,6 @@
 {% extends 'movies/base.html' %}
 {% block body %}
-    {{ user.username }}
+    {{ user.username }}'s detail
     <hr>
     <p><b>작성한 리뷰</b></p>
     {% for review in user.review_set.all %}
