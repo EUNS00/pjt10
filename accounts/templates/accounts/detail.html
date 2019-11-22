@@ -14,9 +14,12 @@
     {% endfor %}
 
     <p>팔로잉: {{ person.followings.all|length }} | 팔로워: {{ person.followers.all|length }}</p>
-    {% if request.user != person.user %}
-        {% if user in person.followers.all %}
-             <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Unffollow</a>
+    {{ person.followers }} <br>
+    {{ request.user }} <br>
+    {{ person }} <br>
+    {% if request.user != person %}
+        {% if request.user in person.followers.all %}
+            <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Unffollow</a>
         {% else %}
             <a class="btn btn-primary btn-lg" href="{% url 'accounts:follow' person.pk %}" role="button">Follow</a>
         {% endif %}
